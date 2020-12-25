@@ -61,9 +61,6 @@
     <Reference Include="Unosquare.RaspberryIO, Version=0.27.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\ws2812\packages\Unosquare.Raspberry.IO.0.27.1\lib\netstandard2.0\Unosquare.RaspberryIO.dll</HintPath>
     </Reference>
-    <Reference Include="Unosquare.WiringPi, Version=0.5.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\ws2812\packages\Unosquare.WiringPi.0.5.1\lib\netstandard2.0\Unosquare.WiringPi.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />
@@ -72,6 +69,12 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\wiringpi-dotnet\src\Unosquare.WiringPi\Unosquare.WiringPi.csproj">
+      <Project>{15d1541d-1291-44ab-9460-d2ecf1f3c8e5}</Project>
+      <Name>Unosquare.WiringPi</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
