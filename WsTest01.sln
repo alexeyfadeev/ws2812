@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.28307.705
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WsTest01", "WsTest01\WsTest01.csproj", "{9C779338-A05D-472D-B7EA-3A34F48FBAF0}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Unosquare.WiringPi", "..\wiringpi-dotnet\src\Unosquare.WiringPi\Unosquare.WiringPi.csproj", "{15D1541D-1291-44AB-9460-D2ECF1F3C8E5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Unosquare.WiringPi", "WiringPi\src\Unosquare.WiringPi\Unosquare.WiringPi.csproj", "{01922874-854E-4B76-8B20-3765D6B93465}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{9C779338-A05D-472D-B7EA-3A34F48FBAF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9C779338-A05D-472D-B7EA-3A34F48FBAF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9C779338-A05D-472D-B7EA-3A34F48FBAF0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{15D1541D-1291-44AB-9460-D2ECF1F3C8E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{15D1541D-1291-44AB-9460-D2ECF1F3C8E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{15D1541D-1291-44AB-9460-D2ECF1F3C8E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{15D1541D-1291-44AB-9460-D2ECF1F3C8E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{01922874-854E-4B76-8B20-3765D6B93465}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{01922874-854E-4B76-8B20-3765D6B93465}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{01922874-854E-4B76-8B20-3765D6B93465}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{01922874-854E-4B76-8B20-3765D6B93465}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

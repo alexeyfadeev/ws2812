@@ -71,8 +71,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\wiringpi-dotnet\src\Unosquare.WiringPi\Unosquare.WiringPi.csproj">
-      <Project>{15d1541d-1291-44ab-9460-d2ecf1f3c8e5}</Project>
+    <ProjectReference Include="..\WiringPi\src\Unosquare.WiringPi\Unosquare.WiringPi.csproj">
+      <Project>{01922874-854e-4b76-8b20-3765d6b93465}</Project>
       <Name>Unosquare.WiringPi</Name>
     </ProjectReference>
   </ItemGroup>
