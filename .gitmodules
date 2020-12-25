@@ -1,0 +1,3 @@
+[submodule "WiringPi"]
+	path = WiringPi
+	url = https://github.com/unosquare/wiringpi-dotnet.git
