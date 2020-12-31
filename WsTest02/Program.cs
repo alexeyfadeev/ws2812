@@ -14,17 +14,36 @@
     class Program
     {
         private const int LedCount = 512;
-        private const int Length = 42;
         private const int ScreenWidth = 64;
         private const int ScreenHeight = 8;
 
         static void Main(string[] args)
         {
             var prog = new Program();
-            prog.Loop(args[0]);
+
+            byte brightness = 127;
+            int mode = 1;
+            int delay = 10;
+            
+            if (args.Length > 1)
+            {
+                brightness = byte.Parse(args[1]);
+                
+                if (args.Length > 2)
+                {
+                    mode = int.Parse(args[2]);
+                    
+                    if (args.Length > 3)
+                    {
+                        delay = int.Parse(args[3]);
+                    }
+                }
+            }
+            
+            prog.Loop(args[0], brightness, mode, delay);
         }
 
-        private void Loop(string url)
+        private void Loop(string url, byte brightness, int mode, int delay)
         {
             Pi.Init<BootstrapWiringPi>();
 
@@ -34,71 +53,117 @@
             //Use 16 LEDs and GPIO Pin 18.
             //Set brightness to maximum (255)
             //Use Unknown as strip type. Then the type will be set in the native assembly.
-            var controller = settings.AddController(LedCount, Pin.Gpio18, StripType.WS2812_STRIP, ControllerType.PWM0, 255, false);
+            var controller = settings.AddController(LedCount, Pin.Gpio18, StripType.WS2812_STRIP, ControllerType.PWM0, brightness, false);
 
             using (var rpi = new WS281x(settings))
             {
-                /*
-                while (true)
-                {
-                    for (int i = 0; i < LedCount; i++)
-                    {
-                        controller.SetLED(i, Color.FromArgb(255, 156, Math.Abs(255 - i) % 256));
-
-                        if (i >= Length)
-                        {
-                            controller.SetLED(i - Length, Color.Black);
-                        }
-
-                        rpi.Render();
-                        Thread.Sleep(5);
-                    }
-
-                    for (int i = LedCount - 1; i >= LedCount - Length; i--)
-                    {
-                        controller.SetLED(i, Color.Black);
-                    }
-
-                    rpi.Render();
-                }
-                */
-
                 using (var bmp = SaveImage(url))
                 {
-                    var heightDiff = bmp.Height - ScreenHeight;
                     int k = 0;
                     int step = 1;
 
-                    for (;; k += step)
+                    if (mode < 4)
                     {
-                        if (k == heightDiff)
+                        var heightDiff = bmp.Height - ScreenHeight;
+                        
+                        if (mode == 3)
                         {
+                            k = heightDiff - 1;
                             step = -1;
-                            k--;
                         }
-                        else if (k == -1)
+                        
+                        for (;; k += step)
                         {
-                            step = 1;
-                            k++;
-                        }
-
-                        for (int i = 0; i < ScreenWidth; i++)
-                        {
-                            bool reverseMode = i % 2 == 1;
-
-                            for (int j = 0; j < ScreenHeight; j++)
+                            if (k == heightDiff)
                             {
-                                controller.SetLED(i * ScreenHeight + j, bmp.GetPixel(i,
-                                    reverseMode ? (ScreenHeight - j) + k : j + k));
+                                if (mode == 1)
+                                {
+                                    step = -1;
+                                    k--;
+                                }
+                                else if (mode == 2)
+                                {
+                                    k = -ScreenHeight + 1;
+                                }
                             }
-                        }
+                            else if (k == -1 && mode == 1)
+                            {
+                                step = 1;
+                                k++;
+                            }
+                            else if (k == -ScreenHeight && mode == 3)
+                            {
+                                k = heightDiff - 1;
+                            }
 
-                        rpi.Render();
-                        Thread.Sleep(10);
+                            for (int i = 0; i < ScreenWidth; i++)
+                            {
+                                bool reverseMode = i % 2 == 1;
+
+                                for (int j = 0; j < ScreenHeight; j++)
+                                {
+                                    var pixelY = reverseMode ? (ScreenHeight - j - 1) + k : j + k;
+
+                                    if (pixelY < 0)
+                                    {
+                                        pixelY = bmp.Height + pixelY;
+                                    }
+                                    
+                                    controller.SetLED(i * ScreenHeight + j, bmp.GetPixel(i, pixelY));
+                                }
+                            }
+
+                            rpi.Render();
+                            Thread.Sleep(delay);
+                        }
+                    }
+                    else
+                    {
+                        var widthDiff = bmp.Width - ScreenWidth;
+                        
+                        for (;; k += step)
+                        {
+                            if (k == widthDiff)
+                            {
+                                if (mode == 4)
+                                {
+                                    step = -1;
+                                    k--;
+                                }
+                                else
+                                {
+                                    k = -ScreenWidth + 1;
+                                }
+                            }
+                            else if (k == -1)
+                            {
+                                step = 1;
+                                k++;
+                            }
+
+                            for (int i = 0; i < ScreenWidth; i++)
+                            {
+                                bool reverseMode = i % 2 == 1;
+
+                                for (int j = 0; j < ScreenHeight; j++)
+                                {
+                                    var pixelX = i + k;
+                                    
+                                    if (pixelX < 0)
+                                    {
+                                        pixelX = bmp.Width + pixelX;
+                                    }
+                                    
+                                    controller.SetLED(i * ScreenHeight + (reverseMode ? (ScreenHeight - j - 1) : j),
+                                        bmp.GetPixel(pixelX, j));
+                                }
+                            }
+
+                            rpi.Render();
+                            Thread.Sleep(delay);
+                        }
                     }
                 }
-
-                
             }
         }
 
