@@ -7,7 +7,7 @@
   <ItemGroup>
     <PackageReference Include="digitalhigh.rpi-ws281x-csharp" Version="1.1.1" />
     <PackageReference Include="System.Drawing.Common" Version="5.0.0" />
-    <PackageReference Include="Unosquare.Raspberry.IO" Version="0.27.1" />
+    <PackageReference Include="Unosquare.Raspberry.IO" Version="0.27.0" />
     <PackageReference Include="Unosquare.WiringPi" Version="0.5.0" />
   </ItemGroup>
 
