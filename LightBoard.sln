@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedAlliance.LightBoardLib", "RedAlliance.LightBoardLib\RedAlliance.LightBoardLib.csproj", "{5C89DA40-B22E-4FB8-A8D4-4B09B73EED64}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LightBoardSample", "LightBoardSample\LightBoardSample.csproj", "{84CB0A09-D812-4F3F-8E30-9F88C48BD34A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{5C89DA40-B22E-4FB8-A8D4-4B09B73EED64}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5C89DA40-B22E-4FB8-A8D4-4B09B73EED64}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5C89DA40-B22E-4FB8-A8D4-4B09B73EED64}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84CB0A09-D812-4F3F-8E30-9F88C48BD34A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84CB0A09-D812-4F3F-8E30-9F88C48BD34A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84CB0A09-D812-4F3F-8E30-9F88C48BD34A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84CB0A09-D812-4F3F-8E30-9F88C48BD34A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
