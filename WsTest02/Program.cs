@@ -13,8 +13,7 @@
 
     class Program
     {
-        private const int LedCount = 512;
-        private const int ScreenWidth = 64;
+        private static int ScreenWidth = 64;
         private const int ScreenHeight = 8;
 
         static void Main(string[] args)
@@ -36,6 +35,11 @@
                     if (args.Length > 3)
                     {
                         delay = int.Parse(args[3]);
+                        
+                        if (args.Length > 4)
+                        {
+                            ScreenWidth = int.Parse(args[4]);
+                        }
                     }
                 }
             }
@@ -50,10 +54,11 @@
             //The default settings uses a frequency of 800000 Hz and the DMA channel 10.
             var settings = Settings.CreateDefaultSettings();
 
+            var ledCount = ScreenWidth * ScreenHeight;
             //Use 16 LEDs and GPIO Pin 18.
             //Set brightness to maximum (255)
             //Use Unknown as strip type. Then the type will be set in the native assembly.
-            var controller = settings.AddController(LedCount, Pin.Gpio18, StripType.WS2812_STRIP, ControllerType.PWM0, brightness, false);
+            var controller = settings.AddController(ledCount, Pin.Gpio18, StripType.WS2812_STRIP, ControllerType.PWM0, brightness, false);
 
             using (var rpi = new WS281x(settings))
             {
@@ -83,7 +88,7 @@
                                 }
                                 else if (mode == 2)
                                 {
-                                    k = -ScreenHeight + 1;
+                                    k = -ScreenHeight;
                                 }
                             }
                             else if (k == -1 && mode == 1)
@@ -91,7 +96,7 @@
                                 step = 1;
                                 k++;
                             }
-                            else if (k == -ScreenHeight && mode == 3)
+                            else if (k < -ScreenHeight && mode == 3)
                             {
                                 k = heightDiff - 1;
                             }
@@ -132,10 +137,10 @@
                                 }
                                 else
                                 {
-                                    k = -ScreenWidth + 1;
+                                    k = -ScreenWidth;
                                 }
                             }
-                            else if (k == -1)
+                            else if (mode == 4 && k == -1)
                             {
                                 step = 1;
                                 k++;
