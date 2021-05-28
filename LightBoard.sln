@@ -3,9 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30804.86
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedAlliance.LightBoardLib", "RedAlliance.LightBoardLib\RedAlliance.LightBoardLib.csproj", "{5C89DA40-B22E-4FB8-A8D4-4B09B73EED64}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RedAlliance.LightBoardLib", "RedAlliance.LightBoardLib\RedAlliance.LightBoardLib.csproj", "{5C89DA40-B22E-4FB8-A8D4-4B09B73EED64}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LightBoardSample", "LightBoardSample\LightBoardSample.csproj", "{84CB0A09-D812-4F3F-8E30-9F88C48BD34A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LightBoardSample", "LightBoardSample\LightBoardSample.csproj", "{84CB0A09-D812-4F3F-8E30-9F88C48BD34A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RedAlliance.FolderMovier", "RedAlliance.FolderMovier\RedAlliance.FolderMovier.csproj", "{CBCCF00F-348A-46A3-BE83-9940A7C7E82C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "rpi_ws281x", "..\rpi-ws281x-csharp\src\rpi_ws281x\rpi_ws281x.csproj", "{54178EE4-C308-4D94-9B11-BF2605B6B179}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +25,14 @@ Global
 		{84CB0A09-D812-4F3F-8E30-9F88C48BD34A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{84CB0A09-D812-4F3F-8E30-9F88C48BD34A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{84CB0A09-D812-4F3F-8E30-9F88C48BD34A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CBCCF00F-348A-46A3-BE83-9940A7C7E82C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBCCF00F-348A-46A3-BE83-9940A7C7E82C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBCCF00F-348A-46A3-BE83-9940A7C7E82C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBCCF00F-348A-46A3-BE83-9940A7C7E82C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54178EE4-C308-4D94-9B11-BF2605B6B179}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54178EE4-C308-4D94-9B11-BF2605B6B179}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54178EE4-C308-4D94-9B11-BF2605B6B179}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54178EE4-C308-4D94-9B11-BF2605B6B179}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
