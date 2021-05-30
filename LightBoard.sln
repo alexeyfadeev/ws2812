@@ -9,7 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LightBoardSample", "LightBo
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RedAlliance.FolderMovier", "RedAlliance.FolderMovier\RedAlliance.FolderMovier.csproj", "{CBCCF00F-348A-46A3-BE83-9940A7C7E82C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "rpi_ws281x", "..\rpi-ws281x-csharp\src\rpi_ws281x\rpi_ws281x.csproj", "{54178EE4-C308-4D94-9B11-BF2605B6B179}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedAlliance.LightBoardUi", "RedAlliance.LightBoardUi\RedAlliance.LightBoardUi.csproj", "{BB45506A-E789-4673-BA01-E4B96656D975}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +29,10 @@ Global
 		{CBCCF00F-348A-46A3-BE83-9940A7C7E82C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CBCCF00F-348A-46A3-BE83-9940A7C7E82C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CBCCF00F-348A-46A3-BE83-9940A7C7E82C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{54178EE4-C308-4D94-9B11-BF2605B6B179}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{54178EE4-C308-4D94-9B11-BF2605B6B179}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{54178EE4-C308-4D94-9B11-BF2605B6B179}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{54178EE4-C308-4D94-9B11-BF2605B6B179}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB45506A-E789-4673-BA01-E4B96656D975}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB45506A-E789-4673-BA01-E4B96656D975}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB45506A-E789-4673-BA01-E4B96656D975}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB45506A-E789-4673-BA01-E4B96656D975}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

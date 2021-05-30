@@ -6,12 +6,12 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\rpi-ws281x-csharp\src\rpi_ws281x\rpi_ws281x.csproj" />
       <ProjectReference Include="..\RedAlliance.FolderMovier\RedAlliance.FolderMovier.csproj" />
       <ProjectReference Include="..\RedAlliance.LightBoardLib\RedAlliance.LightBoardLib.csproj" />
     </ItemGroup>
 
     <ItemGroup>
+      <PackageReference Include="digitalhigh.rpi-ws281x-csharp" Version="1.1.5.1" />
       <PackageReference Include="Microsoft.Extensions.Configuration" Version="5.0.0" />
       <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="5.0.0" />
       <PackageReference Include="Unosquare.Raspberry.IO" Version="0.27.1" />

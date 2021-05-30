@@ -1,0 +1,30 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="RedAlliance.LightBoardUi.MainWindow"
+        Title="RedAlliance.LightBoardUi">
+    <DockPanel>
+        <ListBox DockPanel.Dock="Left"
+                 Width="200" 
+                 Items="{Binding SongItems}"
+                 x:Name="SongListBox">
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Name}" />
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+            
+        <DockPanel Margin="50">
+            <UniformGrid Rows="1" DockPanel.Dock="Bottom">
+                <Button x:Name="Button1">1</Button>
+                <Button x:Name="Button2">2</Button>
+                <Button>Flash</Button>
+            </UniformGrid>
+            <Border DockPanel.Dock="Bottom" Height="40" />
+            <Image x:Name="PreviewImage" />
+        </DockPanel>
+    </DockPanel>
+</Window>
