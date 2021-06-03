@@ -34,7 +34,7 @@
             for (int j = 0; j < this.settings.ScreenHeight; j++)
             {
                 colors.Add(Enumerable.Range(0, this.settings.ScreenWidth)
-                    .Select(i => Color.FromArgb(255, ((i + 1) * 8 - 1) % 56, ((i + 1) * 8 - 1) % 56, ((i + 1) * 8 - 1) % 56)).ToArray());
+                    .Select(i => Color.FromArgb(255, ((i + 1) * 2 - 1) % 40, ((i + 1) * 2 - 1) % 40, ((i + 1) * 2 - 1) % 40)).ToArray());
             }
             
             foreach (var manager in managers)
@@ -83,22 +83,42 @@
         public async Task Stop()
         {
             this.CancelTask();
+
+            await this.lockerSemaphoreSlim.WaitAsync();
+
+            await this.FillSolidColor(Color.FromArgb(255, 0, 0, 0), null);
             
+            this.lockerSemaphoreSlim.Release();
+        }
+        
+        public async Task Flash()
+        {
+            this.CancelTask();
+
+            this.previousRunCancellationTokenSource = new CancellationTokenSource();
+            var token = this.previousRunCancellationTokenSource.Token;
+
+            Task.Run(() => this.FlashTaskProc(token), token);
+        }
+
+        private async Task FillSolidColor(Color color, CancellationToken? ct)
+        {
             var colors = new List<Color[]>();
             for (int j = 0; j < this.settings.ScreenHeight; j++)
             {
                 colors.Add(Enumerable.Range(0, this.settings.ScreenWidth)
-                    .Select(i => Color.FromArgb(255, 0, 0, 0)).ToArray());
+                    .Select(i => color).ToArray());
             }
-            
-            await this.lockerSemaphoreSlim.WaitAsync();
             
             foreach (var manager in managers)
             {
+                if (ct?.IsCancellationRequested == true)
+                {
+                    break;
+                }
+                
                 manager.RenderBitmapData(colors, 0, 0);
             }
-            
-            this.lockerSemaphoreSlim.Release();
         }
 
         private void CancelTask()
@@ -137,8 +157,28 @@
                         item.manager.RenderBitmapData(bmp, 0, item.y + this.settings.Offset);
                     }
 
-                    Thread.Sleep(25);
+                    Thread.Sleep(this.settings.FrameDelay);
                 }
+            }
+
+            this.lockerSemaphoreSlim.Release();
+        }
+        
+        private async Task FlashTaskProc(CancellationToken ct)
+        {
+            await this.lockerSemaphoreSlim.WaitAsync();
+
+            int step = 255 / this.settings.FlashFrames;
+            
+            for (int i = 255; i >= 0 && !ct.IsCancellationRequested; i -= step)
+            {
+                if (i < step)
+                {
+                    i = 0;
+                }
+
+                this.FillSolidColor(Color.FromArgb(255, i, i, i), ct);
+                Thread.Sleep(this.settings.FlashFrameDelay);
             }
 
             this.lockerSemaphoreSlim.Release();

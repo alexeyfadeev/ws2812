@@ -3,6 +3,7 @@ namespace RedAlliance.LightBoardUi
     using System;
     using System.IO;
     using System.Linq;
+    using System.Threading.Tasks;
     using Avalonia;
     using Avalonia.Controls;
     using Avalonia.Markup.Xaml;
@@ -18,17 +19,21 @@ namespace RedAlliance.LightBoardUi
 #endif
             this.DataContext = new ViewModel();
             
-            var songListBox = this.FindControl<ListBox>("SongListBox");
-            songListBox.SelectionChanged += (s, args) => this.ItemSelected(args);
+            this.SongListBox.SelectionChanged += SongListBoxSelectionChanged;
             
             var button1 = this.FindControl<Button>("Button1");
-            button1.Click += (s, args) => this.ButtonClick(1);
+            button1.Click += Button1Click;
             
             var button2 = this.FindControl<Button>("Button2");
-            button2.Click += (s, args) => this.ButtonClick(2);
+            button2.Click += Button2Click;
+            
+            var flashButton = this.FindControl<Button>("FlashButton");
+            flashButton.Click += FlashButtonClick;
         }
-        
+
         private Image PreviewImage => this.FindControl<Image>("PreviewImage");
+
+        private ListBox SongListBox => this.FindControl<ListBox>("SongListBox");
 
         public ViewModel ViewModel => (ViewModel)this.DataContext;
         
@@ -37,22 +42,45 @@ namespace RedAlliance.LightBoardUi
             AvaloniaXamlLoader.Load(this);
         }
 
-        private void ItemSelected(SelectionChangedEventArgs args)
+        private async void Button1Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+        {
+            await this.ButtonClick(1);
+        }
+
+        private async void Button2Click(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+        {
+            await this.ButtonClick(2);
+        }
+
+        private async void FlashButtonClick(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+        {
+            await this.ViewModel.FlashButtonClick();
+        }
+
+        private async void SongListBoxSelectionChanged(object? sender, SelectionChangedEventArgs args)
         {
             if (args.AddedItems.Count < 1)
             {
                 return;
             }
-            
+
             var selectedItem = args.AddedItems[0] as SongItem;
-            this.ViewModel.ItemSelected(selectedItem);
+
+            this.SongListBox.IsEnabled = false;
+            await this.ViewModel.ItemSelected(selectedItem);
+            this.SongListBox.IsEnabled = true;
 
             this.PreviewImage.Source = null;
         }
 
-        private void ButtonClick(int buttonIndex)
+        private async Task ButtonClick(int buttonIndex)
         {
-            this.ViewModel.ButtonClick(buttonIndex);
+            if (this.ViewModel.SelectedItem == null)
+            {
+                return;
+            }
+
+            await this.ViewModel.ButtonClick(buttonIndex);
 
             if (this.ViewModel.RunningIndex == null)
             {

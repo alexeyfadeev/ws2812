@@ -1,6 +1,7 @@
 ﻿namespace RedAlliance.LightBoardUi
 {
     using System.Collections.ObjectModel;
+    using System.Threading.Tasks;
     using Microsoft.Extensions.Configuration;
 
     public class ViewModel
@@ -20,34 +21,41 @@
         
         public int? RunningIndex { get; private set; }
 
-        public void ItemSelected(SongItem selectedItem)
+        public async Task ItemSelected(SongItem selectedItem)
         {
             this.SelectedItem = selectedItem;
             this.RunningIndex = null;
 #if !DEBUG
-            this.lightBoard.ItemSelected(selectedItem);
+            await this.lightBoard.ItemSelected(selectedItem);
 #endif
         }
         
-        public void ButtonClick(int buttonIndex)
+        public async Task ButtonClick(int buttonIndex)
         {
             if (this.RunningIndex == buttonIndex
                 || (buttonIndex > 1 && string.IsNullOrWhiteSpace(this.SelectedItem.Folder2)))
             {
                 this.RunningIndex = null;
 #if !DEBUG
-                this.lightBoard.Stop();
+                await this.lightBoard.Stop();
 #endif
             }
             else
             {
                 this.RunningIndex = buttonIndex;
 #if !DEBUG
-                this.lightBoard.Run(buttonIndex);
+                await this.lightBoard.Run(buttonIndex);
 #endif
             }
         }
-        
+
+        public async Task FlashButtonClick()
+        {
+#if !DEBUG
+            await this.lightBoard.Flash();
+#endif
+        }
+
         private void LoadItems()
         {
             var config = new ConfigurationBuilder()
